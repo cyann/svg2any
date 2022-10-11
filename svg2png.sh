@@ -105,7 +105,7 @@ fi
 
 # Compress with oxipng.
 echo "Executing oxipng_$arch..." >> "$log_file"
-echo "Compressing $input_file_name (using Zopfli - this may take minutes)..."
+echo "Compressing $output_file_name (using Zopfli - this may 2-3 minutes)..."
 ./oxipng_$arch --opt max --interlace 0 --strip safe --alpha -Z "$base_dir/$output_file_name" &>> "$log_file"
 
 # Display the path and size of the output file.
