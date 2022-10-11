@@ -15,4 +15,7 @@ brew install platypus librsvg oxipng
 ```
 
 ### Notes
-There is a new version of rsvg-convert written in Rust, [console-rsvg-convert](https://github.com/miyako/console-rsvg-convert), however as of version 2.1.3 it does not support resizing.
+- There is a new version of rsvg-convert written in Rust, [console-rsvg-convert](https://github.com/miyako/console-rsvg-convert), however as of version 2.1.3 it does not support resizing.
+- When a shell script is running from Platypus, these environment variables can be interesting:
+  - `__CFBundleIdentifier` _com.ystorian.svg2png_
+  - `PWD` _/{app folder}/{Application name}.app/Contents/Resources_
