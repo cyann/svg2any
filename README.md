@@ -5,6 +5,8 @@ Small macOS apps to help convert SVG files to PNG, ICNS, and macOS folder icons.
 ## Usage
 Drop a square SVG file on the app.
 
+Important: The resulting PNG file will be compressed using Zopfli, this takes 2-3 minutes on a recent MacBook Pro M1.
+
 ## Building
 ### Dependencies
 svg2any depends on these binaries to build the apps:
