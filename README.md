@@ -28,3 +28,11 @@ To build the apps, run `./build.sh`.
 - Binaries downloaded using brew are renamed based on the supported architecture, in order to create a universal app.
 	- X86_64 (Intel) -> bin_x64
 	- arm64 (Apple Silicon) -> bin_arm64
+
+## License
+The binaries included in the repository for convenience are open source and are the property of their respective owners.
+- [rsvg-convert](https://gitlab.gnome.org/GNOME/librsvg) (LGPL)
+- [oxipng](https://github.com/shssoichiro/oxipng) (MIT)
+- [Platypus](https://github.com/sveinbjornt/Platypus) (BSD)
+
+The rest is AGPL3, feel free to ask for another license if needed.
