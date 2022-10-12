@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# svg2png - Convert a square SVG file to PNG.
+# svg2png - Convert a square SVG file to a highly compressed 1024 x 1024 PNG file.
 # Flavien Scheurer 2022
 
 # Set the app name and version from the script itself.
@@ -17,7 +17,7 @@ fi
 size=1024
 input_ext=svg
 output_ext=png
-help="Convert a square SVG file to a $size ⨉ $size PNG file."
+help="Convert a square SVG file to a $size ⨉ $size ${output_ext:u} file."
 repo=https://github.com/Ystorian/svg2any
 
 # Log file.
@@ -39,7 +39,7 @@ echo "$PWD" >> "$log_file"
 arch="$(uname -m)"
 if [ "$arch" = "arm64" ]; then
 	arch="arm64"
-elif [ "$arch" = "X86_64"]; then
+elif [ "$arch" = "X86_64" ]; then
 	arch="x64"
 else
 	echo "Error: Unknown architecture $arch" | tee -a "$log_file"
