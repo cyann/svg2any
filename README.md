@@ -13,19 +13,25 @@ Launch the app and drag an SVG file on it to process it.
 Right-click on an SVG file and select **Open with**, then choose one of the svg2any apps.
 
 ## Apps
-### SVG to PNG
+# SVG to PNG
 <img src="images/svg2png.svg" width="10%">
 
 Convert a square SVG file to a highly compressed 1024 x 1024 PNG file.
 
-> [!Warning] The resulting PNG file will be compressed using Zopfli, this takes 2~3 minutes on a recent MacBook Pro M1.
+> **Important ⏳**
+> --
+> The resulting PNG file will be compressed using **Zopfli**, this takes 2~3 minutes on a recent MacBook Pro M1.
 
-### SVG to ICNS
+---
+
+# SVG to ICNS
 <img src="images/svg2icns.svg" width="10%">
 
 Convert a square SVG file to a universal macOS icon (ICNS).
 
-### SVG to folder
+---
+
+# SVG to folder
 <img src="images/svg2folder.svg" width="10%">
 
 Set a macOS folder icon to the specified square SVG file.
@@ -44,7 +50,7 @@ The required dependencies can be installed with [Homebrew](brew.sh):
 ```shell
 brew install platypus librsvg oxipng
 ```
-Note: librsvg and oxipng are present in this repository to help build universal apps.
+Note: `librsvg` and `oxipng` are present in this repository to help build universal apps.
 
 ### Build script
 To build the apps with Platypus, run `./build.sh`.
@@ -55,8 +61,8 @@ To build the apps with Platypus, run `./build.sh`.
 	- `__CFBundleIdentifier` _com.ystorian.svg2png_
 	- `PWD` _/{app folder}/{Application name}.app/Contents/Resources_
 - Binaries downloaded using brew are renamed based on the supported architecture, in order to create a universal app.
-	- X86_64 (Intel) -> bin_x64
-	- arm64 (Apple Silicon) -> bin_arm64
+	- X86_64 (Intel) -> {bin}_x64
+	- arm64 (Apple Silicon) -> {bin}_arm64
 - Some SVG files work best when only the `viewBox` attribute is set. On macOS, the finder will show a better icon preview when the width and height attributes are not present.
 	> Original SVG file:
 	> ```xml
@@ -67,7 +73,7 @@ To build the apps with Platypus, run `./build.sh`.
 	> ```xml
 	> <svg viewBox="0 0 1024 1024" [...]>
 	> ```
-- ICNS file are not compressed with oxipng since iconutil recompress them anyway. Compressing each PNG files before packing them with iconutil will result in larger ICNS files.
+- ICNS file are not compressed with `oxipng` since `iconutil` recompress them anyway. Compressing each PNG files before packing them with `iconutil` will result in larger ICNS files.
 
 
 ## Licenses
