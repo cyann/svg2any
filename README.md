@@ -1,11 +1,36 @@
 # svg2any
+<img src="images/svg2any.svg" width="25%">
 
-Small macOS apps to help convert SVG files to PNG, ICNS, and macOS folder icons.
+> **Small macOS apps to help convert SVG files to PNG, ICNS, and macOS folder icons.**
 
 ## Usage
-Drop a square SVG file on the app.
+### 1. Droplet
+<img src="images/svg2any-droplet_812x840.png" width="25%">
 
-Important: The resulting PNG file will be compressed using Zopfli, this takes 2-3 minutes on a recent MacBook Pro M1.
+Launch the app and drag an SVG file on it to process it.
+
+### 2. Open with
+Right-click on an SVG file and select **Open with**, then choose one of the svg2any apps.
+
+## Apps
+### SVG to PNG
+<img src="images/svg2png.svg" width="10%">
+
+Convert a square SVG file to a highly compressed 1024 x 1024 PNG file.
+
+> [!Warning] The resulting PNG file will be compressed using Zopfli, this takes 2~3 minutes on a recent MacBook Pro M1.
+
+### SVG to ICNS
+<img src="images/svg2icns.svg" width="10%">
+
+Convert a square SVG file to a universal macOS icon (ICNS).
+
+### SVG to folder
+<img src="images/svg2folder.svg" width="10%">
+
+Set a macOS folder icon to the specified square SVG file.
+
+---
 
 ## Building
 ### Dependencies
