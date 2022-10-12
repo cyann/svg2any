@@ -96,7 +96,7 @@ fi
 # Create a PNG file from the SVG.
 echo "Executing rsvg-convert_$arch..." >> "$log_file"
 echo "Converting $input_file_name..."
-./rsvg-convert_$arch --keep-aspect-ratio --width=$size --height=$size --output "$base_dir/$output_file_name" "$base_dir/$input_file_name" # &>> "$log_file"
+./rsvg-convert_$arch --keep-aspect-ratio --width=$size --height=$size --output "$base_dir/$output_file_name" "$base_dir/$input_file_name" &>> "$log_file"
 
 # Test if the output file was created.
 if [[ ! -f "$base_dir/$output_file_name" ]] ; then
