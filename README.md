@@ -32,6 +32,18 @@ To build the apps with Platypus, run `./build.sh`.
 - Binaries downloaded using brew are renamed based on the supported architecture, in order to create a universal app.
 	- X86_64 (Intel) -> bin_x64
 	- arm64 (Apple Silicon) -> bin_arm64
+- Some SVG files work best when only the `viewBox` attribute is set. On macOS, the finder will show a better icon preview when the width and height attributes are not present.
+	> Original SVG file:
+	> ```xml
+	> <svg width="1024" height="1024" [...]>
+	> ```
+	>
+	>Better:
+	> ```xml
+	> <svg viewBox="0 0 1024 1024" [...]>
+	> ```
+- ICNS file are not compressed with oxipng since iconutil recompress them anyway. Compressing each PNG files before packing them with iconutil will result in larger ICNS files.
+
 
 ## Licenses
 The binaries, included in the repository for convenience, are open source and are the property of their respective owners.
