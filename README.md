@@ -61,7 +61,7 @@ To build the apps with Platypus, run `./build.sh`.
 	- `__CFBundleIdentifier` _com.ystorian.svg2png_
 	- `PWD` _/{app folder}/{Application name}.app/Contents/Resources_
 - Binaries downloaded using brew are renamed based on the supported architecture, in order to create a universal app.
-	- X86_64 (Intel) -> {bin}_x64
+	- x86_64 (Intel) -> {bin}_x64
 	- arm64 (Apple Silicon) -> {bin}_arm64
 - Some SVG files work best when only the `viewBox` attribute is set. On macOS, the finder will show a better icon preview when the width and height attributes are not present.
 	> Original SVG file:

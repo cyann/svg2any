@@ -39,7 +39,7 @@ echo "$PWD" >> "$log_file"
 arch="$(uname -m)"
 if [ "$arch" = "arm64" ]; then
 	arch="arm64"
-elif [ "$arch" = "X86_64" ]; then
+elif [ "$arch" = "x86_64" ]; then
 	arch="x64"
 else
 	echo "Error: Unknown architecture $arch" | tee -a "$log_file"
