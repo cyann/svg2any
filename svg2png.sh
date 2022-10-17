@@ -35,19 +35,6 @@ echo "$PWD" >> "$log_file"
 # Exit immediately if any command exits with a non-zero status.
 # set -e
 
-# Determine which CPU architecture we are running on.
-arch="$(uname -m)"
-if [ "$arch" = "arm64" ]; then
-	arch="arm64"
-elif [ "$arch" = "x86_64" ]; then
-	arch="x64"
-else
-	echo "Error: Unknown architecture $arch" | tee -a "$log_file"
-	exit
-fi
-echo "Running on [$arch]" >> "$log_file"
-
-
 # Test if a file was selected.
 if [ "$1" = "" ] ; then
 	# No file selected, assuming we are running as a standalone script, display the help text.
@@ -94,9 +81,9 @@ if [[ -f "$base_dir/$output_file_name" ]] ; then
 fi
 
 # Create a PNG file from the SVG.
-echo "Executing rsvg-convert_$arch..." >> "$log_file"
+echo "Executing rsvg-convert..." >> "$log_file"
 echo "Converting $input_file_name..."
-./rsvg-convert_$arch --keep-aspect-ratio --width=$size --height=$size --output "$base_dir/$output_file_name" "$base_dir/$input_file_name" &>> "$log_file"
+./rsvg-convert --keep-aspect-ratio --width=$size --height=$size --output "$base_dir/$output_file_name" "$base_dir/$input_file_name" &>> "$log_file"
 
 # Test if the output file was created.
 if [[ ! -f "$base_dir/$output_file_name" ]] ; then
@@ -105,9 +92,9 @@ if [[ ! -f "$base_dir/$output_file_name" ]] ; then
 fi
 
 # Compress with oxipng.
-echo "Executing oxipng_$arch..." >> "$log_file"
+echo "Executing oxipng..." >> "$log_file"
 echo "Compressing $output_file_name (using Zopfli - this may 2-3 minutes)..."
-./oxipng_$arch --opt max --interlace 0 --strip safe --alpha -Z "$base_dir/$output_file_name" &>> "$log_file"
+./oxipng --opt max --interlace 0 --strip safe --alpha -Z "$base_dir/$output_file_name" &>> "$log_file"
 
 # Display the path and size of the output file.
 echo "Created $base_dir/$output_file_name ($(stat -f %z "$base_dir/$output_file_name") bytes)"

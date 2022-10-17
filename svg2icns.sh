@@ -35,19 +35,6 @@ echo "$PWD" >> "$log_file"
 # Exit immediately if any command exits with a non-zero status.
 # set -e
 
-# Determine which CPU architecture we are running on.
-arch="$(uname -m)"
-if [ "$arch" = "arm64" ]; then
-	arch="arm64"
-elif [ "$arch" = "x86_64" ]; then
-	arch="x64"
-else
-	echo "Error: Unknown architecture $arch" | tee -a "$log_file"
-	exit
-fi
-echo "Running on [$arch]" >> "$log_file"
-
-
 # Test if a file was selected.
 if [ "$1" = "" ] ; then
 	# No file selected, assuming we are running as a standalone script, display the help text.
@@ -114,7 +101,7 @@ for sizes in $icon_sizes; do
 	png_file_name="icon_$label.png"
 	# Convert with rsvg-convert.
 	echo "Creating $png_file_name ($size x $size)..." | tee -a "$log_file"
-	./rsvg-convert_$arch --width=$size --height=$size --keep-aspect-ratio "$base_dir/$input_file_name" --output "$iconset_dir/$png_file_name" &>> "$log_file"
+	./rsvg-convert --width=$size --height=$size --keep-aspect-ratio "$base_dir/$input_file_name" --output "$iconset_dir/$png_file_name" &>> "$log_file"
 	# Test if the output file was created.
 	if [[ ! -f "$iconset_dir/$png_file_name" ]] ; then
 		echo "Error: Output not found: $iconset_dir/$png_file_name" | tee -a "$log_file"
