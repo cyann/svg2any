@@ -38,32 +38,9 @@ Set a macOS folder icon to the specified square SVG file.
 
 ---
 
-## Building
-### Dependencies
-svg2any depends on these binaries to build the apps:
-- [rsvg-convert](https://gitlab.gnome.org/GNOME/librsvg) 2.54.5 (LGPL)
-- [oxipng](https://github.com/shssoichiro/oxipng) 6.0.1 (MIT)
-- [Platypus](https://github.com/sveinbjornt/Platypus) 5.4 (BSD)
-
-### Prerequisites
-The required dependencies can be installed with [Homebrew](brew.sh):
-```shell
-brew install platypus librsvg oxipng
-```
-Note: `librsvg` and `oxipng` are present in this repository to help build universal apps.
-
-### Build script
-To build the apps with Platypus, run `./build.sh`.
-
-### Notes
-- There is a new version of rsvg-convert written in Rust, [console-rsvg-convert](https://github.com/miyako/console-rsvg-convert), however as of version 2.1.3 it does not support resizing.
-- When a shell script is running from Platypus, these environment variables are used:
-	- `__CFBundleIdentifier` _com.ystorian.svg2png_
-	- `PWD` _/{app folder}/{Application name}.app/Contents/Resources_
-- Binaries downloaded using brew are renamed based on the supported architecture, in order to create a universal app.
-	- x86_64 (Intel) -> {bin}_x64
-	- arm64 (Apple Silicon) -> {bin}_arm64
-- Some SVG files work best when only the `viewBox` attribute is set. On macOS, the finder will show a better icon preview when the width and height attributes are not present.
+## SVG files
+- Some SVGs work best when only the `viewBox` attribute is set.
+- On macOS, the finder will show a better icon preview when the width and height attributes are not present.
 	> Original SVG file:
 	> ```xml
 	> <svg width="1024" height="1024" [...]>
@@ -73,7 +50,70 @@ To build the apps with Platypus, run `./build.sh`.
 	> ```xml
 	> <svg viewBox="0 0 1024 1024" [...]>
 	> ```
-- ICNS file are not compressed with `oxipng` since `iconutil` recompress them anyway. Compressing each PNG files before packing them with `iconutil` will result in larger ICNS files.
+- ICNS file are not compressed with `oxipng` since `iconutil` recompress them anyway.
+- Compressing each PNG files before packing them with `iconutil` will result in larger ICNS files.
+
+---
+
+## Building
+### Dependencies
+svg2any depends on these binaries to build the apps:
+- Build the macOS .app: [Platypus](https://github.com/sveinbjornt/Platypus) 5.4 (BSD)
+- Convert SVG to PNG files: [rsvg-convert](https://gitlab.gnome.org/GNOME/librsvg) 2.55 (LGPL)
+- Compress PNG files: [oxipng](https://github.com/shssoichiro/oxipng) 6.0.1 (MIT)
+
+### How to build the macOS Apps
+### 1. Install platypus
+The command line tool for [Platypus](https://sveinbjorn.org/platypus) can be installed with [Homebrew](brew.sh):
+```shell
+brew install platypus
+```
+
+### 2. Build the apps
+> Note: to help build universal apps, the `librsvg` and `oxipng` compiled binaries for x86_64 (Intel) and arm64 (Apple Silicon since M1) are present in this repository. To build these on your own, see below.
+
+To build the apps with Platypus:
+```sh
+./build.sh
+```
+
+
+### How to (re-)build the universal binaries
+#### 1. Install Rust
+See [rustup.rs](https://rustup.rs/)
+
+#### 2. Download the sources and compile
+
+Use these examples to compile the binaries and combine them to get universal binaries.
+
+### librsvg
+```sh
+git clone https://gitlab.gnome.org/GNOME/librsvg.git
+cd librsvg
+cargo build --release --target aarch64-apple-darwin
+cargo build --release --target x86_64-apple-darwin
+lipo target/aarch64-apple-darwin/release/rsvg-convert target/x86_64-apple-darwin/release/rsvg-convert -create -output rsvg-convert
+```
+Copy `rsvg-convert` to `svg2any/`
+
+### oxipng
+```sh
+git clone https://github.com/shssoichiro/oxipng.git
+cd oxipng
+cargo build --release --target aarch64-apple-darwin
+cargo build --release --target x86_64-apple-darwin
+lipo target/aarch64-apple-darwin/release/oxipng target/x86_64-apple-darwin/release/oxipng -create -output oxipng
+```
+Copy `oxipng` to `svg2any/`
+
+## Scripting
+Some notes on the shell scripts:
+
+- When a shell script is running from Platypus, this environment variables is set:
+	- `__CFBundleIdentifier` _com.ystorian.svg2png_
+
+- Other environment variables:
+	- `PWD` _/{app folder}/{Application name}.app/Contents/Resources_
 
 
 ## Licenses
