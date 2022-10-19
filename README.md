@@ -115,6 +115,19 @@ Some notes on the shell scripts:
 - Other environment variables:
 	- `PWD` _/{app folder}/{Application name}.app/Contents/Resources_
 
+# About
+Why this?
+1. I had an itch to scratch:
+	- I like SVG files: they are tiny, can be optimized a lot, and look good at any resolution.
+	- I also like my folder icons to be more visually descriptive as it makes me more productive.
+	- However macOS can't use SVGs for icons, it works only with ICNS.
+	- Switching to the console to run a script breaks my flow when I'm in the Finder.
+	- Compiling the binaries is a PITA when dealing with C, Rust just works.
+2. This should help me with ysto-agent, our Rust command line tool for Ystorian MVP:
+	- Provide some kind of limited GUI.
+	- In a nice bundled macOS app.
+	- Signed and notarized.
+	- Available in the App Store for easier distribution.
 
 ## Licenses
 The binaries, included in the repository for convenience, are open source and are the property of their respective owners.
