@@ -1,6 +1,10 @@
 #!/bin/zsh
 
-# svg2png - Convert a square SVG file to a highly compressed 1024 x 1024 PNG file.
+# svg2png - Convert an SVG file to a PNG image with transparency,
+# 	perfect for social networks that don't support SVGs.
+# The resulting PNG file is compressed using the slow but efficient
+# Zopfli algorithm for images up to 1024 pixels,
+# and the faster but less efficient zlib algorithm for larger images.
 # Flavien Scheurer 2022
 
 # Set the app name and version from the script itself.

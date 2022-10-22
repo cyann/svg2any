@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# svg2icns - Set a macOS folder icon to the specified square SVG file.
+# svg2icns - Set the containing folder icon to the SVG image.
 # Flavien Scheurer 2022
 
 # Set the app name and version from the script itself.

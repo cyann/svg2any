@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# svg2icns - Convert a square SVG file to a universal macOS icon (ICNS).
+# svg2icns - Convert an SVG file to a macOS high-resolution icon.
 # Flavien Scheurer 2022
 
 # Set the app name and version from the script itself.
