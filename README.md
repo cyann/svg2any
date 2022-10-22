@@ -3,6 +3,7 @@
 
 > **Small macOS apps to help convert SVG files to PNG, ICNS, and macOS folder icons.**
 
+_Inutile, donc indispensable_
 ## Usage
 ### 1. Droplet
 <img src="images/svg2any-droplet_812x840.png" width="25%">
@@ -13,28 +14,24 @@ Launch the app and drag an SVG file on it to process it.
 Right-click on an SVG file and select **Open with**, then choose one of the svg2any apps.
 
 ## Apps
-# SVG to PNG
-<img src="images/svg2png.svg" width="10%">
+# <img src="images/svg2png.svg" width="5%"> SVG to PNG
 
-Convert a square SVG file to a highly compressed 1024 x 1024 PNG file.
+Convert an SVG file to a PNG image with transparency, perfect for social networks that don't support SVGs.
+The resulting PNG file is compressed using the slow but efficient Zopfli algorithm for images up to 1024 pixels, and the faster but less efficient zlib algorithm for larger images.
 
-> **Important ⏳**
+> **Important**
 > --
-> The resulting PNG file will be compressed using **Zopfli**, this takes 2~3 minutes on a recent MacBook Pro M1.
+> The compression used on images up to 1024 pixel is using **Zopfli** and takes **2~3 minutes** on a recent MacBook Pro M1 for a simple image. More complex images with lots of details, or less capable CPUs, will take way more time.
 
 ---
 
-# SVG to ICNS
-<img src="images/svg2icns.svg" width="10%">
-
-Convert a square SVG file to a universal macOS icon (ICNS).
+# <img src="images/svg2icns.svg" width="5%"> SVG to ICNS
+Convert an SVG file to a macOS high-resolution icon.
 
 ---
 
-# SVG to folder
-<img src="images/svg2folder.svg" width="10%">
-
-Set a macOS folder icon to the specified square SVG file.
+# <img src="images/svg2folder.svg" width="5%"> SVG to folder
+Set the containing folder icon to the SVG image.
 
 ---
 
@@ -55,14 +52,43 @@ Set a macOS folder icon to the specified square SVG file.
 
 ---
 
+# About
+Why this?
+1. I had an itch to scratch:
+	- I like SVG files: they are tiny, can be optimized a lot, and look good at any resolution.
+	- I also like my folder icons to be more visually descriptive as it makes me more productive.
+	- However macOS can't use SVGs for icons, it works only with ICNS.
+	- Switching to the console to run a script breaks my flow when I'm managing files and folders with Finder.
+	- Compiling the binaries is a PITA when dealing with C code on legacy hardware (try to `brew install librsvg`), Rust works better.
+2. This little project should help me with ysto-agent, our inventory command line tool written in Rust, for the Ystorian MVP:
+	- Provide some kind of limited GUI.
+	- Bundled in macOS apps that are more user-friendly than command line tools.
+	- With universal binaries to support the modern arm64 architecture (Apple Silicon) as well as the legacy x64 (Intel).
+	- Signed and notarized.
+	- Available in the App Store for easier distribution.
+	- Experiment to find the best app sandboxing and hardening options.
+	- And understand which open source license works best with app distribution in the App Store.
+
+---
+
+## Licenses
+The binaries included in the repository and included in the app bundles where built from these open source repositories:
+- [rsvg-convert](https://gitlab.gnome.org/GNOME/librsvg) (LGPL)
+- [oxipng](https://github.com/shssoichiro/oxipng) (MIT)
+- [Platypus](https://github.com/sveinbjornt/Platypus) (BSD)
+
+The rest is AGPL3, feel free to ask for another license if needed.
+
+---
+
 ## Building
 ### Dependencies
 svg2any depends on these binaries to build the apps:
-- Build the macOS .app: [Platypus](https://github.com/sveinbjornt/Platypus) 5.4 (BSD)
-- Convert SVG to PNG files: [rsvg-convert](https://gitlab.gnome.org/GNOME/librsvg) 2.55 (LGPL)
-- Compress PNG files: [oxipng](https://github.com/shssoichiro/oxipng) 6.0.1 (MIT)
+- Build the macOS .app: [Platypus](https://github.com/sveinbjornt/Platypus)
+- Convert SVG to PNG files: [rsvg-convert](https://gitlab.gnome.org/GNOME/librsvg)
+- Compress PNG files: [oxipng](https://github.com/shssoichiro/oxipng)
 
-### How to build the macOS Apps
+### How to build the macOS apps
 ### 1. Install platypus
 The command line tool for [Platypus](https://sveinbjorn.org/platypus) can be installed with [Homebrew](brew.sh):
 ```shell
@@ -72,19 +98,18 @@ brew install platypus
 ### 2. Build the apps
 > Note: to help build universal apps, the `librsvg` and `oxipng` compiled binaries for x86_64 (Intel) and arm64 (Apple Silicon since M1) are present in this repository. To build these on your own, see below.
 
-To build the apps with Platypus:
+Build the apps with Platypus:
 ```sh
 ./build.sh
 ```
 
 
-### How to (re-)build the universal binaries
+### How to (re-)build the required universal binaries
 #### 1. Install Rust
 See [rustup.rs](https://rustup.rs/)
 
 #### 2. Download the sources and compile
-
-Use these examples to compile the binaries and combine them to get universal binaries.
+Use these commands to compile the binaries and combine them to get the universal binaries.
 
 ### librsvg
 ```sh
@@ -106,33 +131,14 @@ lipo target/aarch64-apple-darwin/release/oxipng target/x86_64-apple-darwin/relea
 ```
 Copy `oxipng` to `svg2any/`
 
-## Scripting
-Some notes on the shell scripts:
 
-- When a shell script is running from Platypus, this environment variables is set:
-	- `__CFBundleIdentifier` _com.ystorian.svg2png_
+## Errors
+### ibtool requires Xcode
+When compiling a Platypus apps, this error message is shown at the step `Optimizing nib file`:
+```
+xcode-select: error: tool 'ibtool' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance
+```
 
-- Other environment variables:
-	- `PWD` _/{app folder}/{Application name}.app/Contents/Resources_
-
-# About
-Why this?
-1. I had an itch to scratch:
-	- I like SVG files: they are tiny, can be optimized a lot, and look good at any resolution.
-	- I also like my folder icons to be more visually descriptive as it makes me more productive.
-	- However macOS can't use SVGs for icons, it works only with ICNS.
-	- Switching to the console to run a script breaks my flow when I'm in the Finder.
-	- Compiling the binaries is a PITA when dealing with C, Rust just works.
-2. This should help me with ysto-agent, our Rust command line tool for Ystorian MVP:
-	- Provide some kind of limited GUI.
-	- In a nice bundled macOS app.
-	- Signed and notarized.
-	- Available in the App Store for easier distribution.
-
-## Licenses
-The binaries, included in the repository for convenience, are open source and are the property of their respective owners.
-- [rsvg-convert](https://gitlab.gnome.org/GNOME/librsvg) (LGPL)
-- [oxipng](https://github.com/shssoichiro/oxipng) (MIT)
-- [Platypus](https://github.com/sveinbjornt/Platypus) (BSD)
-
-The rest is AGPL3, feel free to ask for another license if needed.
+**Solution:**
+Launch **Xcode**, open the **Preferences** pane, select the **Locations** tab and ensure **Command Line Tools** is not empty.
+> Command Line Tools: Xcode 14.0.1 (14A400)
