@@ -90,6 +90,22 @@ if [[ "$2x" != "x" ]]; then
 	fi
 fi
 
+# Ask the user to specify a size.
+user_size=$(osascript -e 'text returned of ( \
+	display dialog "Enter the size in pixel for '$output_file_name' (max '$max_size'):" \
+	default answer "'$size'" with icon file (POSIX file "./AppIcon.icns") \
+	with title "SVG to PNG") as integer')
+
+if [[ "$?" != 0 ]]; then
+	echo "Exiting due to cancel by user" | tee -a "$log_file"
+	exit
+fi
+
+if (($user_size > 0 && $user_size <= max_size && $user_size != $size)); then
+	size=$user_size
+	echo "Size set with dialog to $size" | tee -a "$log_file"
+fi
+
 # Test if the output file already exists.
 if [[ -f "$base_dir/$output_file_name" ]]; then
 	echo "Overwriting existing output file." | tee -a "$log_file"
