@@ -1,9 +1,10 @@
-# svg2any
+# SVG to any
 <img src="images/svg2any.svg" width="25%">
 
-> **Small macOS apps to help convert SVG files to PNG, ICNS, and macOS folder icons.**
+> **Small Mac apps to convert SVG files to PNG, ICNS, and macOS folder icons.**
 
 _Inutile, donc indispensable_
+
 ## Usage
 ### 1. Droplet
 <img src="images/svg2any-droplet_812x840.png" width="25%">
@@ -52,6 +53,11 @@ Set the containing folder icon to the SVG image.
 
 ---
 
+## Logs
+Each app create a unique log file in `~/Library/Logs`.
+
+---
+
 # About
 Why this?
 1. I had an itch to scratch:
@@ -96,7 +102,9 @@ brew install platypus
 ```
 
 ### 2. Build the apps
-> Note: to help build universal apps, the `librsvg` and `oxipng` compiled binaries for x86_64 (Intel) and arm64 (Apple Silicon since M1) are present in this repository. To build these on your own, see below.
+> Notes:
+> - to help build universal apps, the `librsvg` and `oxipng` compiled binaries for x86_64 (Intel) and arm64 (Apple Silicon since M1) are present in this repository. To build these on your own, see below.
+> - the build script optimizes the NIB in the bundles with the `optimize-nib` parameter. This requires Xcode to be installed and configured.
 
 Build the apps with Platypus:
 ```sh
@@ -119,7 +127,7 @@ cargo build --release --target aarch64-apple-darwin
 cargo build --release --target x86_64-apple-darwin
 lipo target/aarch64-apple-darwin/release/rsvg-convert target/x86_64-apple-darwin/release/rsvg-convert -create -output rsvg-convert
 ```
-Copy `rsvg-convert` to `svg2any/`
+The generated `rsvg-convert` universal binary can then be copied to `svg2any/`
 
 ### oxipng
 ```sh
@@ -129,7 +137,7 @@ cargo build --release --target aarch64-apple-darwin
 cargo build --release --target x86_64-apple-darwin
 lipo target/aarch64-apple-darwin/release/oxipng target/x86_64-apple-darwin/release/oxipng -create -output oxipng
 ```
-Copy `oxipng` to `svg2any/`
+The generated `oxipng` universal binary can then be copied to `svg2any/`
 
 
 ## Errors
