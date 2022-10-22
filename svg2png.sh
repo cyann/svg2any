@@ -20,10 +20,12 @@ log_file="$HOME/Library/Logs/$app_name.log"
 
 # Image size in pixels.
 size=1024
-input_ext=svg
-output_ext=png
-help="Convert a square SVG file to a $size ⨉ $size ${output_ext:u} file."
-repo=https://github.com/Ystorian/svg2any
+# Maximum image size to accept.
+#	The maximum image size for PNG is 32767,
+#	but we set a reasonable limit to 8K.
+max_size=8192
+# Maximum image size to use Zopfli (use zlib instead to avoid wasting CPU).
+zopfli_max_size=1024
 
 # Use the version from the bundle if available.
 if [[ -f "$PWD/../Info.plist" ]]; then
@@ -78,6 +80,15 @@ echo "Base directory: $base_dir" >>"$log_file"
 echo "Input file: $input_file_name" >>"$log_file"
 echo "Output file: $output_file_name" >>"$log_file"
 
+# Set the size.
+# Check if a size was given as parameter.
+if [[ "$2x" != "x" ]]; then
+	if (($2 > 0 && $2 <= max_size)); then
+		# The second parameter is in range and is a base 10 integer, let's use it.
+		size=$2
+		echo "Size set with parameter to $size" | tee -a "$log_file"
+	fi
+fi
 
 # Test if the output file already exists.
 if [[ -f "$base_dir/$output_file_name" ]]; then
@@ -86,20 +97,30 @@ if [[ -f "$base_dir/$output_file_name" ]]; then
 fi
 
 # Create a PNG file from the SVG.
-echo "Executing rsvg-convert..." >> "$log_file"
+echo "Executing $(./rsvg-convert -v)" >>"$log_file"
 echo "Converting $input_file_name..."
-./rsvg-convert --keep-aspect-ratio --width=$size --height=$size --output "$base_dir/$output_file_name" "$base_dir/$input_file_name" &>> "$log_file"
+./rsvg-convert --keep-aspect-ratio --width=$size --height=$size \
+	--output "$base_dir/$output_file_name" "$base_dir/$input_file_name" &>>"$log_file"
 
 # Test if the output file was created.
-if [[ ! -f "$base_dir/$output_file_name" ]] ; then
+if [[ ! -f "$base_dir/$output_file_name" ]]; then
 	echo "Error: Output not found: $base_dir/$output_file_name" | tee -a "$log_file"
 	exit
 fi
 
 # Compress with oxipng.
-echo "Executing oxipng..." >> "$log_file"
-echo "Compressing $output_file_name (using Zopfli - this may 2-3 minutes)..."
-./oxipng --opt max --interlace 0 --strip safe --alpha -Z "$base_dir/$output_file_name" &>> "$log_file"
+echo "Executing $(./oxipng -V)" >>"$log_file"
+if (($size > $zopfli_max_size)); then
+	echo "Image size is above $zopfli_max_size pixels, \
+		compressing $output_file_name using zlib..." | tee -a "$log_file"
+	./oxipng --opt max --interlace 0 --strip safe --alpha \
+		"$base_dir/$output_file_name" &>>"$log_file"
+else
+	echo "Image size is below $zopfli_max_size pixels, compressing $output_file_name using Zopfli. \
+		Have a break, this may take more than 5 minutes..." | tee -a "$log_file"
+	./oxipng --opt max --interlace 0 --strip safe --alpha --zopfli \
+		"$base_dir/$output_file_name" &>>"$log_file"
+fi
 
 # Display the path and size of the output file.
 echo "Created $base_dir/$output_file_name ($(stat -f %z "$base_dir/$output_file_name") bytes)" | tee -a "$log_file"
