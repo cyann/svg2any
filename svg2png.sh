@@ -70,6 +70,12 @@ base_file="${base_file%.*}"
 # Output file name.
 output_file_name="$base_file.$output_ext"
 
+# Path to the binaries, set to MacOS when running from an .app bundle.
+bin_path="."
+if [[ -d "../MacOS" ]]; then
+	bin_path="../MacOS"
+fi
+
 # Test if the input file exists.
 if [[ ! -f "$base_dir/$input_file_name" ]]; then
 	echo "Error: File not found: $base_dir/$input_file_name" | tee -a "$log_file"

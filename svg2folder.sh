@@ -63,6 +63,12 @@ output_file_name="$base_file.$output_ext"
 # Icon file path.
 icon_path="$base_dir"/Icon$'\r'
 
+# Path to the binaries, set to MacOS when running from an .app bundle.
+bin_path="."
+if [[ -d "../MacOS" ]]; then
+	bin_path="../MacOS"
+fi
+
 # Temp directory.
 temp_dir="$(mktemp -d)"
 
