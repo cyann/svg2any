@@ -1,11 +1,11 @@
 #!/bin/zsh
 
-# svg2icns - Set the containing folder icon to the SVG image.
+# svg2folder - Set the containing folder icon to the SVG image.
 # Flavien Scheurer 2022
 
 # Declare variables.
 # App name and copyright information.
-app_name="svg2icns"
+app_name="svg2folder"
 author="© 2022 Flavien Scheurer https://github.com/Ystorian/svg2any"
 
 # App version, uses the script file date by default.
