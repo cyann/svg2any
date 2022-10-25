@@ -98,6 +98,7 @@ if [[ "$?" != 0 ]]; then
 	exit
 fi
 
+# Test if the specified size is OK.
 if (($user_size > 0 && $user_size <= max_size && $user_size != $size)); then
 	size=$user_size
 	echo "Size set with dialog to $size" | tee -a "$log_file"
