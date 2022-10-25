@@ -131,8 +131,10 @@ fi
 # Compress with oxipng.
 echo "Executing $bin_path/$("$bin_path/oxipng" -V)" >>"$log_file"
 if (($size > $zopfli_max_size)); then
+	echo "Image size is above $zopfli_max_size pixels, compressing $output_file_name using zlib..." | tee -a "$log_file"
 	"$bin_path/oxipng" --opt max --interlace 0 --strip safe --alpha "$base_dir/$output_file_name" &>>"$log_file"
 else
+	echo "Image size is below $zopfli_max_size pixels, compressing $output_file_name using Zopfli. Have a break, this may take more than 5 minutes..." | tee -a "$log_file"
 	"$bin_path/oxipng" --opt max --interlace 0 --strip safe --alpha --zopfli "$base_dir/$output_file_name" &>>"$log_file"
 fi
 
