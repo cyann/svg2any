@@ -45,3 +45,15 @@ name="svg2folder"
 
 # Copy the required binaries in .app/Contents/MacOS.
 cp "rsvg-convert" "$app_name.app/Contents/MacOS"
+
+######################
+# SVG to 1024 x 1024 #
+######################
+app_name="SVG to 1024 x 1024"
+name="svg2svg"
+
+# Build with Platypus.
+/usr/local/bin/platypus --optimize-nib --overwrite --droppable --app-icon "$name.icns" --name "$app_name" --interface-type Droplet --interpreter "/bin/zsh" --bundle-identifier "$identifier"."$name" --uniform-type-identifiers public.svg-image --bundled-file "Credits.html" --author "$author" --app-version $version "$name.sh" "$app_name"
+
+# Copy the required binaries in .app/Contents/MacOS.
+cp "rsvg-convert" "$app_name.app/Contents/MacOS"
