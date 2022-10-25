@@ -13,7 +13,7 @@ app_name="svg2png"
 author="© 2022 Flavien Scheurer https://github.com/Ystorian/svg2any"
 
 # App version, uses the script file date by default.
-version="$(stat -f %Sm -t %Y%m%d "$0")"
+version="$(stat -f %Sm -t %Y-%m-%d "$0")"
 
 # Log file.
 log_file="$HOME/Library/Logs/$app_name.log"
