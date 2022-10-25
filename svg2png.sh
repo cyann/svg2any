@@ -91,10 +91,7 @@ if [[ "$2x" != "x" ]]; then
 fi
 
 # Ask the user to specify a size.
-user_size=$(osascript -e 'text returned of ( \
-	display dialog "Enter the size in pixel for '$output_file_name' (max '$max_size'):" \
-	default answer "'$size'" with icon file (POSIX file "./AppIcon.icns") \
-	with title "SVG to PNG") as integer')
+user_size=$(osascript -e 'text returned of (display dialog "Enter the size in pixel for '$output_file_name' (max '$max_size'):" default answer "'$size'" with icon file (POSIX file "./AppIcon.icns") with title "SVG to PNG") as integer')
 
 if [[ "$?" != 0 ]]; then
 	echo "Exiting due to cancel by user" | tee -a "$log_file"
