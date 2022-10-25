@@ -5,7 +5,7 @@
 
 # Declare variables.
 # App name and copyright information.
-app_name="svg2png"
+app_name="svg2icns"
 author="© 2022 Flavien Scheurer https://github.com/Ystorian/svg2any"
 
 # App version, uses the script file date by default.
@@ -45,7 +45,7 @@ echo "Running script: $0" >>"$log_file"
 
 # Supported file extensions.
 input_ext=svg
-output_ext=png
+output_ext=icns
 
 # Base directory path.
 base_dir="$(dirname "$1")"
@@ -106,7 +106,7 @@ for sizes in $icon_sizes; do
 done
 
 # Convert the PNG files to an ICNS file.
-iconutil --convert icns --output "$base_dir/$base_file.icns" "$iconset_dir" &>>"$log_file"
+iconutil --convert icns --output "$base_dir/$output_file_name" "$iconset_dir" &>>"$log_file"
 
 # Clean the temp dirs.
 rm -rf "$temp_dir"
