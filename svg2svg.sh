@@ -48,14 +48,14 @@ input_ext=svg
 output_ext=svg
 
 # Base directory path.
-base_dir=$(dirname "$1")
+base_dir="$(dirname "$1")"
 
 # Input file name.
-input_file_name=$(basename "$1")
+input_file_name="$(basename "$1")"
 
 # Base file name without any extension.
-base_file=$(basename "$1" .$input_ext)
-base_file=${base_file%.*}
+base_file="$(basename "$1" .$input_ext)"
+base_file="${base_file%.*}"
 
 # Output file name.
 output_file_name="$base_file-$sizex$size.$output_ext"
