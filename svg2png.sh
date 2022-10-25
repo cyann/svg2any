@@ -68,7 +68,7 @@ base_file="$(basename "$1" .$input_ext)"
 base_file="${base_file%.*}"
 
 # Output file name.
-output_file_name=$base_file.$output_ext
+output_file_name="$base_file.$output_ext"
 
 # Test if the input file exists.
 if [[ ! -f "$base_dir/$input_file_name" ]]; then
