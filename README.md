@@ -36,6 +36,11 @@ Set the containing folder icon to the SVG image.
 
 ---
 
+# <img src="images/svg2svg.svg" width="5%"> SVG to 1024 x 1024
+Resize an SVG to 1024 x 1024.
+
+---
+
 ## SVG files
 - Some SVGs work best when only the `viewBox` attribute is set.
 - On macOS, the finder will show a better icon preview when the width and height attributes are not present.
