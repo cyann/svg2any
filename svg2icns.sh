@@ -103,7 +103,7 @@ for sizes in $icon_sizes; do
 	png_file_name="icon_$label.png"
 	# Convert with rsvg-convert.
 	echo "Creating $png_file_name ($size x $size)..." | tee -a "$log_file"
-	./rsvg-convert --width=$size --height=$size --keep-aspect-ratio "$base_dir/$input_file_name" --output "$iconset_dir/$png_file_name" &>>"$log_file"
+	"$bin_path/rsvg-convert" --width=$size --height=$size --keep-aspect-ratio "$base_dir/$input_file_name" --output "$iconset_dir/$png_file_name" &>>"$log_file"
 	# Test if the output file was created.
 	if [[ ! -f "$iconset_dir/$png_file_name" ]]; then
 		echo "Error: Output not found: $iconset_dir/$png_file_name" | tee -a "$log_file"

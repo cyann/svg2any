@@ -118,10 +118,9 @@ if [[ -f "$base_dir/$output_file_name" ]]; then
 fi
 
 # Create a PNG file from the SVG.
-echo "Executing $(./rsvg-convert -v)" >>"$log_file"
+echo "Executing $bin_path/$("$bin_path/rsvg-convert" -v)" >>"$log_file"
 echo "Converting $input_file_name..."
-./rsvg-convert --keep-aspect-ratio --width=$size --height=$size \
-	--output "$base_dir/$output_file_name" "$base_dir/$input_file_name" &>>"$log_file"
+"$bin_path/rsvg-convert" --keep-aspect-ratio --width=$size --height=$size --output "$base_dir/$output_file_name" "$base_dir/$input_file_name" &>>"$log_file"
 
 # Test if the output file was created.
 if [[ ! -f "$base_dir/$output_file_name" ]]; then
@@ -130,17 +129,11 @@ if [[ ! -f "$base_dir/$output_file_name" ]]; then
 fi
 
 # Compress with oxipng.
-echo "Executing $(./oxipng -V)" >>"$log_file"
+echo "Executing $bin_path/$("$bin_path/oxipng" -V)" >>"$log_file"
 if (($size > $zopfli_max_size)); then
-	echo "Image size is above $zopfli_max_size pixels, \
-		compressing $output_file_name using zlib..." | tee -a "$log_file"
-	./oxipng --opt max --interlace 0 --strip safe --alpha \
-		"$base_dir/$output_file_name" &>>"$log_file"
+	"$bin_path/oxipng" --opt max --interlace 0 --strip safe --alpha "$base_dir/$output_file_name" &>>"$log_file"
 else
-	echo "Image size is below $zopfli_max_size pixels, compressing $output_file_name using Zopfli. \
-		Have a break, this may take more than 5 minutes..." | tee -a "$log_file"
-	./oxipng --opt max --interlace 0 --strip safe --alpha --zopfli \
-		"$base_dir/$output_file_name" &>>"$log_file"
+	"$bin_path/oxipng" --opt max --interlace 0 --strip safe --alpha --zopfli "$base_dir/$output_file_name" &>>"$log_file"
 fi
 
 # Display the path and size of the output file.
