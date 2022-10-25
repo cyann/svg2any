@@ -153,5 +153,5 @@ xcode-select: error: tool 'ibtool' requires Xcode, but active developer director
 ```
 
 **Solution:**
-Launch **Xcode**, open the **Preferences** pane, select the **Locations** tab and ensure **Command Line Tools** is not empty.
+Launch **Xcode**, open the **Settings** pane, select the **Locations** tab and ensure **Command Line Tools** is not empty.
 > Command Line Tools: Xcode 14.0.1 (14A400)
