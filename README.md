@@ -15,7 +15,7 @@ Launch the app and drag an SVG file on it to process it.
 Right-click on an SVG file and select **Open with**, then choose one of the svg2any apps.
 
 ## Apps
-# <img src="images/svg2png.svg" width="5%"> SVG to PNG
+# <img src="images/svg2png.svg" width="10%"> SVG to PNG
 
 Convert an SVG file to a PNG image with transparency, perfect for social networks that don't support SVGs.
 The resulting PNG file is compressed using the slow but efficient Zopfli algorithm for images up to 1024 pixels, and the faster but less efficient zlib algorithm for larger images.
@@ -26,17 +26,17 @@ The resulting PNG file is compressed using the slow but efficient Zopfli algorit
 
 ---
 
-# <img src="images/svg2icns.svg" width="5%"> SVG to ICNS
+# <img src="images/svg2icns.svg" width="10%"> SVG to ICNS
 Convert an SVG file to a macOS high-resolution icon.
 
 ---
 
-# <img src="images/svg2folder.svg" width="5%"> SVG to folder
+# <img src="images/svg2folder.svg" width="10%"> SVG to folder
 Set the containing folder icon to the SVG image.
 
 ---
 
-# <img src="images/svg2svg.svg" width="5%"> SVG to 1024 x 1024
+# <img src="images/svg2svg.svg" width="10%"> SVG to 1024 x 1024
 Resize an SVG to 1024 x 1024.
 
 ---
