@@ -82,7 +82,7 @@ if [[ ! -f "$base_dir/$input_file_name" ]]; then
 fi
 
 echo "Base directory: $base_dir" >>"$log_file"
-echo "Input file: $input_file_name" >>"$log_file"
+echo "Input file: $input_file_name ($(stat -f %z "$base_dir/$input_file_name") bytes)" >>"$log_file"
 echo "Output file: $output_file_name" >>"$log_file"
 
 # Set the size.
