@@ -16,7 +16,11 @@ author="© 2022 Flavien Scheurer https://github.com/ystorian/svg2any"
 version="$(stat -f %Sm -t %Y-%m-%d "$0")"
 
 # Log file.
-log_file="$HOME/Library/Logs/$app_name.log"
+log_dir="$HOME/Library/Logs/Ystorian"
+if [[ ! -d $log_dir ]]; then
+	mkdir $log_dir
+fi
+log_file="$log_dir/$app_name.log"
 
 # Image size in pixels.
 size=1024
@@ -48,7 +52,7 @@ if [[ "$1" = "" ]]; then
 fi
 
 # Log the app name, version, and path.
-echo "\n\n$(date +"%Y-%m-%d %H:%M:%S") $app_name version $version" >>"$log_file"
+echo "$(date +"%Y-%m-%d %H:%M:%S") $app_name version $version" >>"$log_file"
 echo "Running script: $0" >>"$log_file"
 
 # Define the file variables.
@@ -139,4 +143,4 @@ fi
 
 # Display the path and size of the output file.
 echo "Created $base_dir/$output_file_name ($(stat -f %z "$base_dir/$output_file_name") bytes)" | tee -a "$log_file"
-echo "$(date +"%Y-%m-%d %H:%M:%S") Done." >>"$log_file"
+echo "$(date +"%Y-%m-%d %H:%M:%S") Done.\n\n" >>"$log_file"

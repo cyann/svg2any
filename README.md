@@ -59,7 +59,7 @@ Resize an SVG to 1024 x 1024.
 ---
 
 ## Logs
-Each app create a unique log file in `~/Library/Logs`.
+Each app create a unique log file in `~/Library/Logs/Ystorian`.
 
 ---
 
