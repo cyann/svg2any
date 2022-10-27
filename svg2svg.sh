@@ -13,8 +13,8 @@ version="$(stat -f %Sm -t %Y-%m-%d "$0")"
 
 # Log file.
 log_dir="$HOME/Library/Logs/Ystorian"
-if [[ ! -d $log_dir ]]; then
-	mkdir $log_dir
+if [[ ! -d "$log_dir" ]]; then
+	mkdir "$log_dir"
 fi
 log_file="$log_dir/$app_name.log"
 
