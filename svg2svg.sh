@@ -35,6 +35,7 @@ fi
 if [[ "$1" = "" ]]; then
 	# No file selected, assuming we are running as a standalone script, display the help text.
 	echo "$app_name version $version"
+	echo $author
 	echo "Resize an SVG to 1024 x 1024."
 	echo "The converted file will be created in the same directory as the input file."
 	echo "\n\tUsage: $app_name file"

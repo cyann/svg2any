@@ -35,6 +35,7 @@ fi
 if [[ "$1" = "" ]]; then
 	# No file selected, assuming we are running as a standalone script, display the help text.
 	echo "$app_name version $version"
+	echo $author
 	echo "Set the containing folder icon to the SVG image"
 	echo "The converted file will be a hidden icon resource in the same directory."
 	echo "\n\tUsage: $app_name file"
