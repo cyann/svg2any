@@ -1,0 +1,18 @@
+// File sourced from https://github.com/ystorian/template
+// Format: https://cspell.org/configuration/
+{
+	// Version of the setting file, always "0.2".
+	"version": "0.2",
+	// Current active spelling language.
+	"language": "en",
+	// List of words to be always considered correct.
+	"words": [
+		"clippy",
+		"pango",
+		"pixbuf",
+		"serde",
+		"Ysto",
+		"Ystorian"
+	],
+	"ignoreWords": []
+}
