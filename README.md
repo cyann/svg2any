@@ -23,10 +23,10 @@ then choose one of the svg2any apps.
 
 | App | Description |
 | --- | ----------- |
-| <img src="images/svg2png.svg" width="20%" valign="bottom"> [svg2png](#svg-to-png) | Convert an SVG file to a PNG image with transparency |
-| <img src="images/svg2icns.svg" width="20%" valign="bottom"> [svg2icns](#svg-to-icns) | Convert an SVG file to a macOS high-resolution icon |
-| <img src="images/svg2folder.svg" width="20%" valign="bottom"> [svg2folder](#svg-to-folder) | Set the containing folder icon to the SVG image |
-| <img src="images/svg2svg.svg" width="20%" valign="bottom"> [svg2svg](#svg-to-1024-x-1024) | Resize an SVG to 1024 x 1024 |
+| <img src="images/svg2png.svg" width="48" valign="bottom"> [svg2png](#svg-to-png) | Convert an SVG file to a PNG image with transparency |
+| <img src="images/svg2icns.svg" width="48" valign="bottom"> [svg2icns](#svg-to-icns) | Convert an SVG file to a macOS high-resolution icon |
+| <img src="images/svg2folder.svg" width="48" valign="bottom">&nbsp;[svg2folder](#svg-to-folder) | Set the containing folder icon to the SVG image |
+| <img src="images/svg2svg.svg" width="48" valign="bottom"> [svg2svg](#svg-to-1024-x-1024) | Resize an SVG to 1024 x 1024 |
 
 ### SVG to PNG
 
