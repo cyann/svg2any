@@ -6,7 +6,7 @@
 # Declare variables.
 # App name and copyright information.
 app_name="svg2icns"
-author="© 2022 Flavien Scheurer https://github.com/ystorian/svg2any"
+url="https://github.com/cyann/svg2any"
 
 # App version, uses the script file date by default.
 version="$(stat -f %Sm -t %Y-%m-%d "$0")"
@@ -35,7 +35,7 @@ fi
 if [[ "$1" = "" ]]; then
 	# No file selected, assuming we are running as a standalone script, display the help text.
 	echo "$app_name version $version"
-	echo $author
+	echo $url
 	echo "Convert an SVG file to a macOS high-resolution icon"
 	echo "The converted file will be created in the same directory as the input file."
 	echo "\n\tUsage: $app_name file"
