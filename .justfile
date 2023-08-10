@@ -65,7 +65,7 @@ svg2svg: (_build svg2svg svg2svg_app_name) && (_include_rsvg svg2svg_app_name)
 
 
 # Build all
-all: svg2png svg2icns svg2folder svg2svg
+build: svg2png svg2icns svg2folder svg2svg zip_release
 
 
 # Compress all apps and save a zip in /releases.
