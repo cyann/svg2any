@@ -12,28 +12,29 @@
 
 <img src="images/svg2any-droplet_812x840.png" width="25%">
 
-Launch the app and drag an SVG file on it to process it.
+Launch one of the apps, then drop an **SVG file** to convert it.
 
-### 2. With the Finder `Open with ...`
+### 2. Using the Finder `Open with ...` menu
 
-Right-click on an SVG file, select **Open with**,
+Right-click on an **SVG file**, select **Open with**,
 then choose one of the svg2any apps.
 
 ## Apps
 
 | App | Description |
 | --- | ----------- |
-| <img src="images/svg2png.svg" width="10%" valign="bottom"> [svg2png](#svg-to-png) | Convert an SVG file to a PNG image with transparency |
-| <img src="images/svg2icns.svg" width="10%" valign="bottom"> [svg2icns](#svg-to-icns) | Convert an SVG file to a macOS high-resolution icon |
-| <img src="images/svg2folder.svg" width="10%" valign="bottom"> [svg2folder](#svg-to-folder) | Set the containing folder icon to the SVG image |
-| <img src="images/svg2svg.svg" width="10%" valign="bottom"> [svg2svg](#svg-to-1024-x-1024) | Resize an SVG to 1024 x 1024 |
+| <img src="images/svg2png.svg" width="20%" valign="bottom"> [svg2png](#svg-to-png) | Convert an SVG file to a PNG image with transparency |
+| <img src="images/svg2icns.svg" width="20%" valign="bottom"> [svg2icns](#svg-to-icns) | Convert an SVG file to a macOS high-resolution icon |
+| <img src="images/svg2folder.svg" width="20%" valign="bottom"> [svg2folder](#svg-to-folder) | Set the containing folder icon to the SVG image |
+| <img src="images/svg2svg.svg" width="20%" valign="bottom"> [svg2svg](#svg-to-1024-x-1024) | Resize an SVG to 1024 x 1024 |
 
 ### SVG to PNG
 
 <img src="images/svg2png.svg" width="10%">
 
-Convert an SVG file to a PNG image with transparency,
-perfect for social networks that don't support SVGs.
+Convert an SVG file to a PNG image with transparency, perfect for social
+networks that don't support SVGs.
+
 The resulting PNG file is compressed using the slow but efficient Zopfli algorithm
 for images up to 1024 pixels, and the faster but less efficient zlib algorithm
 for larger images.
@@ -67,6 +68,11 @@ Set the containing folder icon to the SVG image.
 <img src="images/svg2svg.svg" width="10%">
 
 Resize an SVG to 1024 x 1024.
+
+The resulting SVG will not be optimized, it's just a simple resize.
+
+It is recommended to optimize the resulting SVG with [svgo](https://github.com/svg/svgo),
+an online version is available at [SVGOMG](https://jakearchibald.github.io/svgomg/).
 
 ---
 
