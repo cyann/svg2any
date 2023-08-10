@@ -7,11 +7,19 @@
 	"language": "en",
 	// List of words to be always considered correct.
 	"words": [
-		"clippy",
+		"aarch",
+		"donc",
+		"dyld",
+		"dylib",
+		"ibtool",
+		"iconutil",
+		"libiconv",
+		"libresolv",
+		"lipo",
+		"osascript",
+		"otool",
 		"pango",
 		"pixbuf",
-		"serde",
-		"Ysto",
 		"Ystorian"
 	],
 	"ignoreWords": []
