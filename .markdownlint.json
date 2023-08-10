@@ -1,8 +1,4 @@
 {
-	"_comment": {
-		"source": "https://github.com/ystorian/template",
-		"format": "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md"
-	},
 	"default": true,
 	"MD010": {
 		"code_blocks": false
