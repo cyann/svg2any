@@ -1,6 +1,6 @@
 # SVG to any
 
-<img src="images/svg2any.svg" width="25%">
+<img src="images/svg2any.svg" width="50%">
 
 > **Small Mac apps to convert SVG files to PNG, ICNS, and macOS folder icons.**
 >
@@ -10,7 +10,7 @@
 
 ### 1. As a droplet apps
 
-<img src="images/svg2any-droplet_812x840.png" width="25%">
+<img src="images/svg2any-droplet_812x840.png" width="50%">
 
 Launch one of the apps, then drop an **SVG file** to convert it.
 
@@ -30,7 +30,7 @@ then choose one of the svg2any apps.
 
 ### SVG to PNG
 
-<img src="images/svg2png.svg" width="10%">
+<img src="images/svg2png.svg" width="25%">
 
 Convert an SVG file to a PNG image with transparency, perfect for social
 networks that don't support SVGs.
@@ -49,7 +49,7 @@ for larger images.
 
 ### SVG to ICNS
 
-<img src="images/svg2icns.svg" width="10%">
+<img src="images/svg2icns.svg" width="25%">
 
 Convert an SVG file to a macOS high-resolution icon.
 
@@ -57,7 +57,7 @@ Convert an SVG file to a macOS high-resolution icon.
 
 ### SVG to folder
 
-<img src="images/svg2folder.svg" width="10%">
+<img src="images/svg2folder.svg" width="25%">
 
 Set the containing folder icon to the SVG image.
 
@@ -65,7 +65,7 @@ Set the containing folder icon to the SVG image.
 
 ### SVG to 1024 x 1024
 
-<img src="images/svg2svg.svg" width="10%">
+<img src="images/svg2svg.svg" width="25%">
 
 Resize an SVG to 1024 x 1024.
 
