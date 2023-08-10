@@ -165,9 +165,15 @@ brew install platypus
 ```
 
 ### 2. Build the apps
-> Notes:
-> - to help build universal apps, the `librsvg` and `oxipng` compiled binaries for x86_64 (Intel) and arm64 (Apple Silicon since M1) are present in this repository. To build these on your own, see below.
-> - the build script optimizes the NIB in the bundles with the `optimize-nib` parameter. This requires Xcode to be installed and configured.
+
+Notes:
+
+- To help build universal apps, the `librsvg` and `oxipng` compiled binaries
+for x86_64 (Intel) and arm64 (Apple Silicon since M1) used to present in this
+repository.
+- The build script optimizes the NIB in the bundles with the `optimize-nib`
+parameter.
+- This requires Xcode to be installed and configured.
 
 Build the apps with Platypus:
 
