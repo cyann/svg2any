@@ -132,12 +132,6 @@ iconutil --convert icns --output "$temp_dir/$base_file.icns" "$iconset_dir" &>>"
 # Create the icon with the extended attribute "com.apple.ResourceFork".
 echo "read 'icns' (-16455) \"$temp_dir/$base_file.icns\";\n" | rez -align longword -o "$icon_path" &>>/dev/null
 
-# Create a temp resource file which points to the ICNS file.
-# echo "read 'icns' (-16455) \"$temp_dir/$base_file.icns\";" >"$temp_dir/$base_file.rsrc"
-
-# Append the resource file.
-# rez -a "$temp_dir/$base_file.rsrc" -o "$icon_path" &>>"$log_file"
-
 # Set the base folder to show the icon.
 setfile -a C "$base_dir" &>>"$log_file"
 
