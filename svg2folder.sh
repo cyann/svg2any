@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # svg2folder - Set the containing folder icon to the SVG image.
-# Flavien Scheurer 2022
+# Flavien Scheurer 2022-2023
 
 # Declare variables.
 # App name and copyright information.

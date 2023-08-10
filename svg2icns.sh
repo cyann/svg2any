@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # svg2icns - Convert an SVG file to a macOS high-resolution icon.
-# Flavien Scheurer 2022
+# Flavien Scheurer 2022-2023
 
 # Declare variables.
 # App name and copyright information.
@@ -68,6 +68,19 @@ output_file_name="$base_file.$output_ext"
 bin_path="."
 if [[ -d "../MacOS" ]]; then
 	bin_path="../MacOS"
+fi
+# Test if rsvg-convert is available in the App bundle.
+if [[ -x "$bin_path/rsvg-convert" ]]; then
+	echo "Using rsvg-convert from $bin_path" >>"$log_file"
+else
+	# Test if rsvg-convert is available in the system path.
+	bin_path="$(which rsvg-convert)"
+	echo "Using rsvg-convert from $bin_path" >>"$log_file"
+fi
+# Test if rsvg-convert is available.
+if [[ ! -x "$bin_path/rsvg-convert" ]]; then
+	echo "Error: rsvg-convert not found" | tee -a "$log_file"
+	exit
 fi
 
 # Temp directory.

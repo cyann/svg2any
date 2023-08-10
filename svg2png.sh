@@ -5,7 +5,7 @@
 # The resulting PNG file is compressed using the slow but efficient
 # Zopfli algorithm for images up to 1024 pixels,
 # and the faster but less efficient zlib algorithm for larger images.
-# Flavien Scheurer 2022
+# Flavien Scheurer 2022-2023
 
 # Declare variables.
 # App name and copyright information.

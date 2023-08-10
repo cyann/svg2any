@@ -1,12 +1,12 @@
 #!/bin/zsh
 
 # svg2svg - Resize an SVG to 1024 x 1024.
-# Flavien Scheurer 2022
+# Flavien Scheurer 2022-2023
 
 # Declare variables.
 # App name and copyright information.
 app_name="svg2svg"
-author="© 2022 Flavien Scheurer https://github.com/ystorian/svg2any"
+url="https://github.com/cyann/svg2any"
 
 # App version, uses the script file date by default.
 version="$(stat -f %Sm -t %Y-%m-%d "$0")"
