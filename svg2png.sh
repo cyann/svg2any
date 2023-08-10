@@ -16,7 +16,7 @@ url="https://github.com/cyann/svg2any"
 version="$(stat -f %Sm -t %Y-%m-%d "$0")"
 
 # Log file.
-log_dir="$HOME/Library/Logs/Ystorian"
+log_dir="$HOME/Library/Logs/cyann"
 if [[ ! -d "$log_dir" ]]; then
 	mkdir "$log_dir"
 fi
