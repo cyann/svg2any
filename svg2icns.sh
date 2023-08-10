@@ -69,19 +69,14 @@ bin_path="."
 if [[ -d "../MacOS" ]]; then
 	bin_path="../MacOS"
 fi
+
 # Test if rsvg-convert is available in the App bundle.
-if [[ -x "$bin_path/rsvg-convert" ]]; then
-	echo "Using rsvg-convert from $bin_path" >>"$log_file"
-else
-	# Test if rsvg-convert is available in the system path.
-	bin_path="$(which rsvg-convert)"
-	echo "Using rsvg-convert from $bin_path" >>"$log_file"
+rsvg_bin="$bin_path/rsvg-convert"
+if [[ ! -x "$rsvg_bin" ]]; then
+	# Not available, use the system path.
+	rsvg_bin="$(which rsvg-convert)"
 fi
-# Test if rsvg-convert is available.
-if [[ ! -x "$bin_path/rsvg-convert" ]]; then
-	echo "Error: rsvg-convert not found" | tee -a "$log_file"
-	exit
-fi
+echo "Using $rsvg_bin ($($rsvg_bin --version))" | tee -a "$log_file"
 
 # Temp directory.
 temp_dir="$(mktemp -d)"
@@ -120,7 +115,7 @@ for sizes in $icon_sizes; do
 	png_file_name="icon_$label.png"
 	# Convert with rsvg-convert.
 	echo "Creating $png_file_name ($size x $size)..." | tee -a "$log_file"
-	"$bin_path/rsvg-convert" --width=$size --height=$size --keep-aspect-ratio "$base_dir/$input_file_name" --output "$iconset_dir/$png_file_name" &>>"$log_file"
+	"$rsvg_bin" --width=$size --height=$size --keep-aspect-ratio "$base_dir/$input_file_name" --output "$iconset_dir/$png_file_name" &>>"$log_file"
 	# Test if the output file was created.
 	if [[ ! -f "$iconset_dir/$png_file_name" ]]; then
 		echo "Error: Output not found: $iconset_dir/$png_file_name" | tee -a "$log_file"

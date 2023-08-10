@@ -70,6 +70,14 @@ if [[ -d "../MacOS" ]]; then
 	bin_path="../MacOS"
 fi
 
+# Test if rsvg-convert is available in the App bundle.
+rsvg_bin="$bin_path/rsvg-convert"
+if [[ ! -x "$rsvg_bin" ]]; then
+	# Not available, use the system path.
+	rsvg_bin="$(which rsvg-convert)"
+fi
+echo "Using $rsvg_bin ($($rsvg_bin --version))" | tee -a "$log_file"
+
 # Test if the input file exists.
 if [[ ! -f "$base_dir/$input_file_name" ]]; then
 	echo "Error: File not found: $base_dir/$input_file_name" | tee -a "$log_file"
@@ -87,9 +95,8 @@ if [[ -f "$base_dir/$output_file_name" ]]; then
 fi
 
 # Resize the SVG.
-echo "Executing $bin_path/$("$bin_path/rsvg-convert" -v)" >>"$log_file"
 echo "Resizing $input_file_name..."
-"$bin_path/rsvg-convert" --format svg --keep-aspect-ratio --width=$size --height=$size --output "$base_dir/$output_file_name" "$base_dir/$input_file_name" &>>"$log_file"
+"$rsvg_bin" --format svg --keep-aspect-ratio --width=$size --height=$size --output "$base_dir/$output_file_name" "$base_dir/$input_file_name" &>>"$log_file"
 
 # Test if the output file was created.
 if [[ ! -f "$base_dir/$output_file_name" ]]; then

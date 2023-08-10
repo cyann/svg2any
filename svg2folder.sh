@@ -73,6 +73,14 @@ if [[ -d "../MacOS" ]]; then
 	bin_path="../MacOS"
 fi
 
+# Test if rsvg-convert is available in the App bundle.
+rsvg_bin="$bin_path/rsvg-convert"
+if [[ ! -x "$rsvg_bin" ]]; then
+	# Not available, use the system path.
+	rsvg_bin="$(which rsvg-convert)"
+fi
+echo "Using $rsvg_bin ($($rsvg_bin --version))" | tee -a "$log_file"
+
 # Temp directory.
 temp_dir="$(mktemp -d)"
 
@@ -110,7 +118,7 @@ for sizes in $icon_sizes; do
 	png_file_name="icon_$label.png"
 	# Convert with rsvg-convert.
 	echo "Creating $png_file_name ($size x $size)..." | tee -a "$log_file"
-	"$bin_path/rsvg-convert" --width=$size --height=$size --keep-aspect-ratio "$base_dir/$input_file_name" --output "$iconset_dir/$png_file_name" &>>"$log_file"
+	"$rsvg_bin" --width=$size --height=$size --keep-aspect-ratio "$base_dir/$input_file_name" --output "$iconset_dir/$png_file_name" &>>"$log_file"
 	# Test if the output file was created.
 	if [[ ! -f "$iconset_dir/$png_file_name" ]]; then
 		echo "Error: Output not found: $iconset_dir/$png_file_name" | tee -a "$log_file"
@@ -122,7 +130,13 @@ done
 iconutil --convert icns --output "$temp_dir/$base_file.icns" "$iconset_dir" &>>"$log_file"
 
 # Create the icon with the extended attribute "com.apple.ResourceFork".
-echo "read 'icns' (-16455) \"$temp_dir/$base_file.icns\";\n" | rez -p -o "$icon_path" &>>/dev/null
+echo "read 'icns' (-16455) \"$temp_dir/$base_file.icns\";\n" | rez -align longword -o "$icon_path" &>>/dev/null
+
+# Create a temp resource file which points to the ICNS file.
+# echo "read 'icns' (-16455) \"$temp_dir/$base_file.icns\";" >"$temp_dir/$base_file.rsrc"
+
+# Append the resource file.
+# rez -a "$temp_dir/$base_file.rsrc" -o "$icon_path" &>>"$log_file"
 
 # Set the base folder to show the icon.
 setfile -a C "$base_dir" &>>"$log_file"
@@ -131,7 +145,8 @@ setfile -a C "$base_dir" &>>"$log_file"
 setfile -a V "$icon_path" &>>"$log_file"
 
 # Clean the temp dirs.
-rm -rf "$temp_dir"
+# rm -rf "$temp_dir"
+echo "Temp directory: $temp_dir" >>"$log_file"
 
 # Display the path and size of the output file.
 echo "Created an icon in $base_dir" | tee -a "$log_file"

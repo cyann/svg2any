@@ -80,6 +80,23 @@ if [[ -d "../MacOS" ]]; then
 	bin_path="../MacOS"
 fi
 
+# Test if rsvg-convert is available in the App bundle.
+rsvg_bin="$bin_path/rsvg-convert"
+if [[ ! -x "$rsvg_bin" ]]; then
+	# Not available, use the system path.
+	rsvg_bin="$(which rsvg-convert)"
+fi
+echo "Using $rsvg_bin ($($rsvg_bin --version))" | tee -a "$log_file"
+
+# Test for oxipng.
+oxipng_bin="$bin_path/oxipng"
+# Test if oxipng is available in the App bundle.
+if [[ ! -x "$oxipng_bin" ]]; then
+	# Not available, use the system path.
+	oxipng_bin="$(which oxipng)"
+fi
+echo "Using $oxipng_bin ($($oxipng_bin --version))" | tee -a "$log_file"
+
 # Test if the input file exists.
 if [[ ! -f "$base_dir/$input_file_name" ]]; then
 	echo "Error: File not found: $base_dir/$input_file_name" | tee -a "$log_file"
@@ -122,9 +139,8 @@ if [[ -f "$base_dir/$output_file_name" ]]; then
 fi
 
 # Create a PNG file from the SVG.
-echo "Executing $bin_path/$("$bin_path/rsvg-convert" -v)" >>"$log_file"
 echo "Converting $input_file_name..."
-"$bin_path/rsvg-convert" --keep-aspect-ratio --width=$size --height=$size --output "$base_dir/$output_file_name" "$base_dir/$input_file_name" &>>"$log_file"
+"$rsvg_bin" --keep-aspect-ratio --width=$size --height=$size --output "$base_dir/$output_file_name" "$base_dir/$input_file_name" &>>"$log_file"
 
 # Test if the output file was created.
 if [[ ! -f "$base_dir/$output_file_name" ]]; then
@@ -133,13 +149,12 @@ if [[ ! -f "$base_dir/$output_file_name" ]]; then
 fi
 
 # Compress with oxipng.
-echo "Executing $bin_path/$("$bin_path/oxipng" -V)" >>"$log_file"
 if (($size > $zopfli_max_size)); then
 	echo "Image size is above $zopfli_max_size pixels, compressing $output_file_name using zlib..." | tee -a "$log_file"
-	"$bin_path/oxipng" --opt max --interlace 0 --strip safe --alpha "$base_dir/$output_file_name" &>>"$log_file"
+	"$oxipng_bin" --opt max --interlace 0 --strip safe --alpha "$base_dir/$output_file_name" &>>"$log_file"
 else
 	echo "Image size is below $zopfli_max_size pixels, compressing $output_file_name using Zopfli. Have a break, this may take more than 5 minutes..." | tee -a "$log_file"
-	"$bin_path/oxipng" --opt max --interlace 0 --strip safe --alpha --zopfli "$base_dir/$output_file_name" &>>"$log_file"
+	"$oxipng_bin" --opt max --interlace 0 --strip safe --alpha --zopfli "$base_dir/$output_file_name" &>>"$log_file"
 fi
 
 # Display the path and size of the output file.
