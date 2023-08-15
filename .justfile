@@ -5,7 +5,7 @@
 # Common variables.
 identifier := "net.cyann"
 author := "Flavien Scheurer"
-version := "1.3.0"
+version := "1.3.1"
 release_dir := "releases"
 
 name := "not_set"
