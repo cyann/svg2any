@@ -122,7 +122,7 @@ when I'm managing files and folders with Finder.
 - Compiling the binaries is a PITA when dealing with C code
 on legacy hardware (try to `brew install librsvg`), Rust works better.
 
-This little project should help me with Ally, [Ystorian](<https://ystorian.com]'s>
+This little project should help me with Ally, [Ystorian](https://ystorian.com)'s
 inventory command line tool written in Rust:
 
 - Provide some kind of limited GUI.
