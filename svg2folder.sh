@@ -109,7 +109,9 @@ fi
 # Define the 10 default icon sizes in a macOS .ICNS file.
 # https://developer.apple.com/design/human-interface-guidelines/macos/icons-and-images/app-icon/
 # https://developer.apple.com/library/archive/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Optimizing/Optimizing.html
-icon_sizes=(16,16x16 32,16x16@2x 32,32x32 64,32x32@2x 128,128x128 256,128x128@2x 256,256x256 512,256x256@2x 512,512x512 1024,512x512@2x)
+# icon_sizes=(16,16x16 32,16x16@2x 32,32x32 64,32x32@2x 128,128x128 256,128x128@2x 256,256x256 512,256x256@2x 512,512x512 1024,512x512@2x)
+# Note: smaller icon sizes were having artifacts, or were scrambled, so I removed them.
+icon_sizes=(512,512x512 1024,512x512@2x)
 
 # Create a PNG file for each icon_sizes.
 for sizes in $icon_sizes; do
